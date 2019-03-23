@@ -1,4 +1,8 @@
-let newVariable = 'Playing around with typeof.';
-console.log(typeof newVariable);
-newVariable = 1;
-console.log(typeof newVariable);
+let tutorName = 'Klaus';
+console.log(tutorName);
+tutorName = 'Bernd';
+console.log(tutorName);
+const myName = 'Veit';
+console.log(`${tutorName} sind die Dozenten von ${myName}`);
+
+console.log(typeof tutorName);
