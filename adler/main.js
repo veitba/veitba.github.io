@@ -33,10 +33,13 @@ let pin = L.marker(
     [breite, laenge]
 ).addTo(karte);
 
+// Popup zum Pin hängen
+pin.bindPopup(titel).openPopup();
+
+
+
+//2. Punkt
 let pin2 = L.marker(
     [breite2, laenge2]
 ).addTo(karte);
-
-// Popup zum Pin hängen
-pin.bindPopup(titel).openPopup();
 pin2.bindPopup(titel2).openPopup();
