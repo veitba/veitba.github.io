@@ -20,18 +20,20 @@ let karte = L.map("map");
 // console.log(karte);
 
 // auf Ausschnitt zoomen
-karte.setView(
-    [47.2, 11.2],
-    8
-);
+// karte.setView(
+//     [47.2, 11.2],
+//     8
+// );
 
 // Open Streetmap einbauen
 L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png").addTo(karte);
 
+// Fernrohre
+let blickeGruppe = L.featureGroup().addTo(karte);
 // Positionsmarker hinzufügen
 let pin = L.marker(
     [breite, laenge]
-).addTo(karte);
+).addTo(blickeGruppe);
 
 // Popup zum Pin hängen
 pin.bindPopup(titel);
@@ -41,20 +43,23 @@ pin.bindPopup(titel);
 //2. Punkt
 let pin2 = L.marker(
     [breite2, laenge2]
-).addTo(karte);
+).addTo(blickeGruppe);
 pin2.bindPopup(titel2);
 
-// Ferngläser
+
 
 
 //for Schleife pin erstellen
-for (let blick of adlerblicke) {
+for (let blick of ADLERBLICKE) {
     let blickpin = L.marker(
         [blick.lat, blick.lng]
-    ).addTo(karte);
+    ).addTo(blickeGruppe);
     blickpin.bindPopup(
         `<h1>Standort ${blick.standort}</h1>
             <p>Höhe: ${blick.seehoehe} m </p>
             <em>Kunde: ${blick.kunde}</em>`
     );
 }
+console.log(blickeGruppe.getBounds());
+// Auf Adlerblicke zoomen
+karte.fitBounds(blickeGruppe.getBounds());

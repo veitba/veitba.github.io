@@ -1,8 +1,8 @@
-// Ferngläser
+// Fernrohre
 
 
 //Arrays erstellt
-const adlerblicke = [{
+const ADLERBLICKE = [{
         "kunde": "Wilder Kaiser ",
         "standort": "Gruttenhütte",
         "seehoehe": 1640,
