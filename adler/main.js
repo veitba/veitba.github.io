@@ -48,35 +48,13 @@ pin2.bindPopup(titel2);
 
 
 //for Schleife pin erstellen
-const adlerblicke = [{
-        kunde: "Wilder Kaiser ",
-        standort: "Gruttenhütte",
-        seehoehe: "1640",
-        lat: 47.55564,
-        lng: 12.31861,
-    },
-    {
-        kunde: "Bergbahn Scheffau ",
-        standort: "Brandstadl",
-        seehoehe: "1640",
-        lat: 47.4912,
-        lng: 12.248,
-    },
-    {
-        kunde: "Lechtal Tourismus ",
-        standort: "Sonnalm Jöchelspitze",
-        seehoehe: "1786",
-        lat: 47.41028,
-        lng: 10.60083,
-    }
-];
 for (let blick of adlerblicke) {
     let blickpin = L.marker(
         [blick.lat, blick.lng]
     ).addTo(karte);
     blickpin.bindPopup(
         `<h1>Standort ${blick.standort}</h1>
-                <p>Höhe: ${blick.seehoehe} m </p>
-                <em>Kunde: ${blick.kunde}</em>`
+            <p>Höhe: ${blick.seehoehe} m </p>
+            <em>Kunde: ${blick.kunde}</em>`
     );
 }
