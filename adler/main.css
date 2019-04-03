@@ -1,0 +1,87 @@
+body {
+    max-width: 1280px;
+    margin: auto;
+    font-family: "Roboto";
+}
+
+header {
+    text-align: center;
+    background-image: url("images/header2.jpg");
+    background-position: 0 45%;
+}
+
+header h2 {
+    font-size: 3em;
+    /*Schrift 4mal so groß wie normalgröße*/
+    color: white;
+    margin: 0;
+    padding: 2em 0;
+}
+
+header h3 {
+    font-size: 2em;
+}
+
+header h4 {
+    font-size: 1.1em;
+}
+
+.author {
+    text-align: center;
+}
+
+.author img {
+    border-radius: 50%;
+    margin-top: -50px;
+    border: 4px solid white;
+}
+
+address a {
+    color: gray;
+}
+
+main {
+    width: 70%;
+    margin: auto;
+}
+
+main figure {
+    margin-left: 0;
+}
+
+main figcaption {
+    float: left;
+    margin-left: -12em;
+    width: 11.5em;
+    color: gray;
+}
+
+main figure img {
+    width: 90%;
+}
+
+#map {
+    height: 360px;
+    width: 90%;
+    border: 1px solid black;
+}
+
+.back {
+    float: left;
+}
+
+.next {
+    float: right;
+}
+
+footer {
+    padding: 1em 0 3em 0;
+}
+
+@media only screen and (max-width: 900px) {
+    main figcaption {
+        float: none;
+        margin-left: 0;
+        width: auto;
+    }
+}
