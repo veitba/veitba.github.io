@@ -19,26 +19,24 @@ L.Control.Coordinates = L.Control.extend({
 		precision: 4
 	},
 
-	initialize: function(options)
-	{
+	initialize: function (options) {
 		L.Control.prototype.initialize.call(this, options);
 	},
 
-	onAdd: function(map)
-	{
+	onAdd: function (map) {
 		var className = 'leaflet-control-coordinates',
 			that = this,
 			container = this._container = L.DomUtil.create('div', className);
 		this.visible = false;
 
-			L.DomUtil.addClass(container, 'hidden');
+		L.DomUtil.addClass(container, 'hidden');
 
 
 		L.DomEvent.disableClickPropagation(container);
 
 		this._addText(container, map);
 
-		L.DomEvent.addListener(container, 'click', function() {
+		L.DomEvent.addListener(container, 'click', function () {
 			var lat = L.DomUtil.get(that._lat),
 				lng = L.DomUtil.get(that._lng),
 				latTextLen = this.options.latitudeText.length + 1,
@@ -49,15 +47,14 @@ L.Control.Coordinates = L.Control.extend({
 				lngCoordinate = lng.textContent.substr(lngTextIndex);
 
 			window.prompt(this.options.promptText, latCoordinate + ' ' + lngCoordinate);
-    	}, this);
+		}, this);
 
 		return container;
 	},
 
-	_addText: function(container, context)
-	{
-		this._lat = L.DomUtil.create('span', 'leaflet-control-coordinates-lat' , container),
-		this._lng = L.DomUtil.create('span', 'leaflet-control-coordinates-lng' , container);
+	_addText: function (container, context) {
+		this._lat = L.DomUtil.create('span', 'leaflet-control-coordinates-lat', container),
+			this._lng = L.DomUtil.create('span', 'leaflet-control-coordinates-lng', container);
 
 		return container;
 	},
@@ -66,8 +63,7 @@ L.Control.Coordinates = L.Control.extend({
 	 * This method should be called when user clicks the map.
 	 * @param event object
 	 */
-	setCoordinates: function(obj)
-	{
+	setCoordinates: function (obj) {
 		if (!this.visible) {
 			L.DomUtil.removeClass(this._container, 'hidden');
 		}
