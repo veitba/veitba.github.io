@@ -26,7 +26,10 @@ let karte = L.map("map");
 // );
 
 // Open Streetmap einbauen
-L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png").addTo(karte);
+L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png",{
+    subdomains:["a","b","c"],
+    attribution:'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+}).addTo(karte);
 
 // Fernrohre
 let blickeGruppe = L.featureGroup().addTo(karte);
