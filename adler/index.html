@@ -4,16 +4,26 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Der Adlerweg - Stüdlhütte bis zum Lucknerhaus</title><!-- TODO:Titel der Etappe -->
+    <title>Der Adlerweg - Stüdlhütte bis zum Lucknerhaus</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
-    <script src=blicke.js></script>
+    <script src="blicke.js"></script>
+
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css'
+        rel='stylesheet' />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/leaflet-hash/0.2.1/leaflet-hash.js'></script>
+    <link href="plugins/Control.Coordinates.css" rel="stylesheet">
+    <script src="plugins/Control.Coordinates.js"></script>
+
+
     <script defer src="main.js"></script>
+
 </head>
 
 <body>
@@ -21,7 +31,7 @@
         <h3>Der Adlerweg</h3>
         <h4>Tirols bekanntester Wanderweg in 20 Etappen</h4>
         <h2>Von der Stüdlhütte bis zum Lucknerhaus</h2>
-        <!-- TODO: eine Überschrift 2 mit dem Titel der Etappe -->
+
     </header>
 
     <div class="author">
@@ -47,7 +57,8 @@
             wiesenreiche Tal des Bergerbachs. Schließlich erreicht man das sonnig gelegene Lucknerhaus. Hier endet der
             Adlerweg, die Kalser Glocknerstraße schlängelt sich von dort abwärts. Aber zuerst einmal rasten, sich
             stärken und ausgiebig das schöne Gefühl genießen, am Ziel zu sein!<br>
-            (Quelle: <a href="https://www.tirol.at/reisefuehrer/sport/wandern/wandertouren/a-adlerweg-etappe-o9-stuedlhuette-lucknerhaus">Tirol.at</a>)
+            (Quelle: <a
+                href="https://www.tirol.at/reisefuehrer/sport/wandern/wandertouren/a-adlerweg-etappe-o9-stuedlhuette-lucknerhaus">Tirol.at</a>)
         </p>
 
 
@@ -64,7 +75,8 @@
             Passage in kurzen Serpentinen durch Schutt und Geröll, aber mit gutem Untergrund.
         </p>
         <figure>
-            <figcaption><em><i class="fas fa-camera-retro"></i> Die Stüdlhütte als Startpunkt unserer finalen Etappe</em>
+            <figcaption><em><i class="fas fa-camera-retro"></i> Die Stüdlhütte als Startpunkt unserer finalen
+                    Etappe</em>
             </figcaption>
             <img src="images/Stuedlhuette.jpg" alt="Die Stüdlhütte">
         </figure>
@@ -81,13 +93,14 @@
             der schöne Beginn, wenn man ihn von dieser Seite aus in Angriff nimmt. Wegbeschreibungen siehe auch:
             „Osttiroler Wanderbuch“ von Walter Mair.</p>
 
-            <figure>
-                <figcaption><em><i class="fas fa-camera-retro"></i> Auch dieser beeindruckende Blick auf den Großglockner erwartet euch</em>
-                </figcaption>
-                <img src="images/grossglockner.jpg" alt="Der Großglockenr">
-            </figure>
+        <figure>
+            <figcaption><em><i class="fas fa-camera-retro"></i> Auch dieser beeindruckende Blick auf den Großglockner
+                    erwartet euch</em>
+            </figcaption>
+            <img src="images/grossglockner.jpg" alt="Der Großglockenr">
+        </figure>
 
-            <h2>Wissenswertes zu dieser Etappe</h2>
+        <h2>Wissenswertes zu dieser Etappe</h2>
         <p>Adlerblick - Soviel grandiose Natur macht neugierig auf die Geheimnisse der Bergwelt. Wer die Zusammenhänge
             besser verstehen will, kann sich die Lehrpfade genauer ansehen: den „Geo-Lehrpfad“ am Luckner Weg und den
             „Lehrweg Glocknerspur-BergeDenken“, ausgehend vom Lucknerhaus. Auf dieser letzten Etappe wirft man gern
@@ -100,21 +113,28 @@
             Deshalb unbedingt bei der Tourenplanung Wetterinformationen einholen! </p>
 
 
-        (Quelle: <a href="https://www.tirol.at/reisefuehrer/sport/wandern/wandertouren/a-adlerweg-etappe-o9-stuedlhuette-lucknerhaus">Tirol.at</a>)</p>
+        (Quelle: <a
+            href="https://www.tirol.at/reisefuehrer/sport/wandern/wandertouren/a-adlerweg-etappe-o9-stuedlhuette-lucknerhaus">Tirol.at</a>)
+        </p>
 
 
         <h3>Übersichtskarte</h3>
-        <div id="map" data-lat="47.05472" data-lng="12.68083" data-title="Stüdlhütte" data-lat2="47.0348" data-lng2="12.5899"
-            data-title2="Alpengasthof Lucknerhaus"></div>
+        <div id="map" data-lat="47.05472" data-lng="12.68083" data-title="Stüdlhütte" data-lat2="47.0348"
+            data-lng2="12.5899" data-title2="Alpengasthof Lucknerhaus"></div>
 
 
 
         <h3>Weiterführende Links zum Adlerweg</h3>
         <ul>
-            <li><a href="https://www.tirol.at/reisefuehrer/sport/wandern/adlerweg?gclid=EAIaIQobChMI4NPUm8ai4QIVC-J3Ch3O_wQJEAAYASAAEgIggPD_BwE">Tirol.at</a></li>
-            <li><a href="https://www.austria.info/at/aktivitaten/wandern-und-alpen/wandern-in-osterreich/die-schonsten-hohenwege/tirol-der-adlerweg">Austria.info</a></li>
+            <li><a
+                    href="https://www.tirol.at/reisefuehrer/sport/wandern/adlerweg?gclid=EAIaIQobChMI4NPUm8ai4QIVC-J3Ch3O_wQJEAAYASAAEgIggPD_BwE">Tirol.at</a>
+            </li>
+            <li><a
+                    href="https://www.austria.info/at/aktivitaten/wandern-und-alpen/wandern-in-osterreich/die-schonsten-hohenwege/tirol-der-adlerweg">Austria.info</a>
+            </li>
             <li><a href="https://www.glocknerspur.at/berghuetten-in-kals/">Berghütten in der Region</a></li>
-            <li><a href="https://www.alpenverein.at/portal_wAssets/z_alt/portal/Home/Downloads/Alpenverein_3_05/Freiberger.pdf">Österreichischer
+            <li><a
+                    href="https://www.alpenverein.at/portal_wAssets/z_alt/portal/Home/Downloads/Alpenverein_3_05/Freiberger.pdf">Österreichischer
                     Alpenverein</a></li>
         </ul>
 
