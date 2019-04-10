@@ -78,18 +78,22 @@ karte.setView(
 
 //console.log(SPORTSTAETTEN);
 
+//Piktogramme definieren
 for (let staette of SPORTSTAETTEN) {
     //console.log(staette);
     let piktogramm = L.icon({
-        iconUrl : `icon/icon_${staette.icon}_schwarz_auf_weiss_250px.png`
+        iconUrl : `icons/icon_${staette.icon}_schwarz_auf_weiss_250px.png`,
+        iconSize : 40,
     });
 
+// Marker zeichnen    
     let staettepin = L.marker(
         [staette.lat, staette.lng], {
             icon : piktogramm
         }
     ).addTo(karte);
 
+// Popups hinzufügen
     staettepin.bindPopup(
         `<h2>Name: ${staette.name}</h2>
             <p>Adresse: ${staette.adresse} </p>
