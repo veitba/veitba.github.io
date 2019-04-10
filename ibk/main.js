@@ -7,7 +7,7 @@ let karte = L.map("map");
 
 
 const kartenLayer = {
-    osm: L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+    osm: L.tileLayer("https://{s}.tile.osm.org/{z}/{x}/{y}.png", {
         subdomains: ["a", "b", "c"],
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
     }),
