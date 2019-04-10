@@ -85,7 +85,7 @@ for (let staette of SPORTSTAETTEN) {
     ).addTo(karte);
 
     staettepin.bindPopup(
-        `<h1>Name: ${staette.name}</h1>
+        `<h2>Name: ${staette.name}</h2>
             <p>Adresse: ${staette.adresse} </p>
             <p><em>Typ: ${staette.typ}</em> <p>
             <em>Gruppe: ${staette.gruppe}</em>`
