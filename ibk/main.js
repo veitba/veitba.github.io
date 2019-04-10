@@ -85,7 +85,9 @@ for (let staette of SPORTSTAETTEN) {
     });
 
     let staettepin = L.marker(
-        [staette.lat, staette.lng]
+        [staette.lat, staette.lng], {
+            icon : piktogramm
+        }
     ).addTo(karte);
 
     staettepin.bindPopup(
