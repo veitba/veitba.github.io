@@ -1,7 +1,4 @@
-const div = document.getElementById("map");
-const breite = div.getAttribute("data-lat");
-const laenge = div.getAttribute("data-lng");
-const titel = div.getAttribute("data-title");
+
 
 let karte = L.map("map");
 
@@ -59,35 +56,6 @@ const kartenLayer = {
 
 kartenLayer.osm.addTo(karte);
 
-
-//karte.setView(
-//  [breite,laenge],
-//  13
-//);
-
-let positionsMarker = L.marker([47,11]).addTo(karte);       //Positionsmarker setzen
-karte.locate({                                              // auf Standort setzen
-    setView: true,
-    maxZoom: 16,
-    watch: true,
-})
-
-karte.on("locationfound", function (event) {
-    console.log(event);
-    //L.marker(event.latlng).addTo(karte);
-    positionsMarker.setLatLng(event.latlng); 
-    L.circle([                                      //Kreis um den Marker
-        event.latitude, event.longitude
-    ], {
-        radius: event.accuracy/2
-    }).addTo(karte);
-})
-
-karte.on("locationerror", function (event) {        //Fehlermeldung bei keinem Standort
-    alert("leider keinen Standort gefunden")
-});
-
-//Auswahlmenü hinzufügen
 L.control.layers({
     "OpenStreetMap": kartenLayer.osm,
     "Geoland Basecamp": kartenLayer.geolandbasemap,
@@ -101,3 +69,28 @@ L.control.layers({
     "Stamen Maps Terrain": kartenLayer.stamen_terrain,
     "Stamen Maps Watercolor": kartenLayer.stamen_watercolor
 }).addTo(karte);
+
+
+karte.setView(
+ [47.267222,11.392778],
+  15
+);
+
+//console.log(SPORTSTAETTEN);
+
+for (let staette of SPORTSTAETTEN) {
+    console.log(staette);
+    staettepin = L.marker(
+        [staette.lat, staette.lng]
+    ).addTo(karte);
+
+    staettepin.bindPopup(
+        `<h1>Name: ${staette.name}</h1>
+            <p>Adresse: ${staette.adresse} </p>
+            <p><em>Typ: ${staette.typ}</em> <p>
+            <em>Gruppe: ${staette.gruppe}</em>`
+    );
+}
+
+
+
