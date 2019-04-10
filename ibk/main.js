@@ -79,8 +79,12 @@ karte.setView(
 //console.log(SPORTSTAETTEN);
 
 for (let staette of SPORTSTAETTEN) {
-    console.log(staette);
-    staettepin = L.marker(
+    //console.log(staette);
+    let piktogramm = L.icon({
+        iconUrl : `icon/icon_${staette.icon}_schwarz_auf_weiss_250px.png`
+    });
+
+    let staettepin = L.marker(
         [staette.lat, staette.lng]
     ).addTo(karte);
 
@@ -91,6 +95,8 @@ for (let staette of SPORTSTAETTEN) {
             <em>Gruppe: ${staette.gruppe}</em>`
     );
 }
+
+
 
 
 
