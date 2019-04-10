@@ -65,22 +65,27 @@ kartenLayer.osm.addTo(karte);
 //  13
 //);
 
+let positionsMarker = L.marker([47,11]).addTo(karte);
 karte.locate({
     setView: true,
     maxZoom: 16,
+    watch: true,
 })
 
 karte.on("locationfound", function (event) {
     console.log(event);
-    L.marker([
-        event.latitude, event.longitude
-    ]).addTo(karte);
+    //L.marker(event.latlng).addTo(karte);
+    positionsMarker.setLatLng(event.latlng);
     L.circle([
         event.latitude, event.longitude
     ], {
         radius: event.accuracy/2
     }).addTo(karte);
 })
+
+karte.on("locationerror", function (event) {
+    alert("leider keinen Standort gefunden")
+});
 
 //Auswahlmenü hinzufügen
 L.control.layers({
