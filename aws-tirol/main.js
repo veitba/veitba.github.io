@@ -76,4 +76,14 @@ karte.setView(
   15
 );
 
-console.log(AWS)
+//console.log(AWS);
+const awsTirol = L.featureGroup();
+L.geoJson(AWS)
+    .bindPopup(function(layer){
+        console.log("Layer ", layer);
+        return `Temperatur: ${layer.feature.properties.LT} °C <br>
+        Datum: ${layer.feature.properties.date}`;
+    })  //Popups erstellen
+    .addTo(awsTirol);
+awsTirol.addTo(karte);
+karte.fitBounds(awsTirol.getBounds()); //Zoom auf die Pins
