@@ -98,16 +98,58 @@ async function loadStations() {
     awsTirol.addTo(karte);
     karte.fitBounds(awsTirol.getBounds()); //Zoom auf die Pins
     layerControl.addOverlay(awsTirol, "Wetterstationen Tirol");
+
+    // Windrichtung anzeigen
+    const windLayer = L.featureGroup();
     L.geoJson(stations, {
         pointToLayer: function (feature, latlng) {
             if (feature.properties.WR) {
+                let color = 'black';
+                if (feature.properties.WG > 20) {
+                    color = 'red';
+                }
                 return L.marker(latlng, {
                     icon: L.divIcon({
-                        html: '<i class="fas fa-arrow-circle-up"></i>'
+                        html: `<i style="color: ${color};transform: rotate(${feature.properties.WR}deg)" class="fas fa-arrow-circle-up fa-3x"></i>`
                     })
                 });
             }
         }
-    }).addTo(karte);
+    }).addTo(windLayer);
+    layerControl.addOverlay(windLayer, "Windrichtung");
+    windLayer.addTo(karte)
+
+    // Temperatur Layer hinzufügen
+    const tempLayer = L.featureGroup();
+    const farbPalette = [
+        [0, "blue"],
+        [1, "orange"],
+        [2, "red"],
+
+    ]
+    L.geoJson(stations, {
+        pointToLayer: function (feature, latlng) {
+            if (feature.properties.LT) {
+                let color = 'red'
+                for (let i = 0; i < farbPalette.length; i++) {
+                    console.log(farbPalette[i], feature.properties.LT);
+                    if (feature.properties.LT < farbPalette[i][0])
+                        color = farbPalette[i][1]
+                    break;
+                }
+               // let color = 'blue';
+                //if (feature.properties.LT > 0) {
+                //    color = 'red';
+                //}
+                return L.marker(latlng, {
+                    icon: L.divIcon({
+                        html: `<div class="tempLabel"; style="background-color: ${color}">${feature.properties.LT}</div>`
+                    })
+                });
+            }
+        }
+    }).addTo(tempLayer);
+    layerControl.addOverlay(tempLayer, "Temperatur");
+    tempLayer.addTo(karte)
 }
 loadStations();
