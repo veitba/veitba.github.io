@@ -77,13 +77,20 @@ karte.setView(
 );
 
 //console.log(AWS);
-const awsTirol = L.featureGroup();
-L.geoJson(AWS)
-    .bindPopup(function(layer){
-        console.log("Layer ", layer);
-        return `Temperatur: ${layer.feature.properties.LT} °C <br>
-        Datum: ${layer.feature.properties.date}`;
-    })  //Popups erstellen
-    .addTo(awsTirol);
-awsTirol.addTo(karte);
-karte.fitBounds(awsTirol.getBounds()); //Zoom auf die Pins
+
+async function loadStations() {
+    const response = await fetch("https://aws.openweb.cc/stations");
+    const stations = await response.json();
+    const awsTirol = L.featureGroup();
+    L.geoJson(stations)
+        .bindPopup(function(layer){
+            console.log("Layer ", layer);
+            return `Temperatur: ${layer.feature.properties.LT} °C <br>
+            Datum: ${layer.feature.properties.date}`;
+        })  //Popups erstellen
+        .addTo(awsTirol);
+    awsTirol.addTo(karte);
+    karte.fitBounds(awsTirol.getBounds()); //Zoom auf die Pins
+}
+loadStations();
+
