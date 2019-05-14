@@ -210,6 +210,7 @@ async function loadStations() {
     //Schneehöhen (eigner Farbverlauf)
     const schneeLayer = L.featureGroup();
     const schneePalette = [
+<<<<<<< HEAD
         [10, "#e4e6e4"],
         [20, "#ffad00"],
         [30, "#00bc02"],
