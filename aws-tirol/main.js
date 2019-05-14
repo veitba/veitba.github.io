@@ -170,7 +170,7 @@ async function loadStations() {
             }
         }
     }).addTo(tempLayer);
-    layerControl.addOverlay(tempLayer, "Temperatur");
+    layerControl.addOverlay(tempLayer, "Temperatur in °C");
     tempLayer.addTo(karte)
 
     // Relative Feuchte Layer hinzufügen
@@ -204,7 +204,7 @@ async function loadStations() {
             }
         }
     }).addTo(feuchtLayer);
-    layerControl.addOverlay(feuchtLayer, "Relative Feuchte");
+    layerControl.addOverlay(feuchtLayer, "Relative Feuchte in %");
     //feuchtLayer.addTo(karte)
 }
 
