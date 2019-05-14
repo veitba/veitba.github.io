@@ -101,16 +101,32 @@ async function loadStations() {
 
     // Windrichtung anzeigen
     const windLayer = L.featureGroup();
+    const windgPalette = [
+        [3.60, "#05B603"], //<3
+        [8.23, "#0ECE24"], //3-4
+        [11.32, "#73D36F"], //4-5
+        [14.40, "#FBD8D3"], //6
+        [17.49, "#FFB4B3"], //7
+        [21.09, "#FF9F9D"], //8
+        [24.69, "#FF8281"], //9
+        [28.81, "#FE5F61"], //10
+        [32.96, "#FE4341"], //11
+        [999, "#FF1F0E"], //>11
+    ];
+
     L.geoJson(stations, {
         pointToLayer: function (feature, latlng) {
             if (feature.properties.WR) {
-                let color = 'black';
-                if (feature.properties.WG > 20) {
-                    color = 'red';
+                let color = windgPalette[windgPalette.length - 1][1];
+                for (let i = 0; i < windgPalette.length; i++) {
+                    if (feature.properties.WG < windgPalette[i][0]) {
+                        color = windgPalette[i][1];
+                        break;
+                    } else {}
                 }
                 return L.marker(latlng, {
                     icon: L.divIcon({
-                        html: `<i style="color: ${color};transform: rotate(${feature.properties.WR}deg)" class="fas fa-arrow-circle-up fa-3x"></i>`
+                        html: `<i style= "color: ${color}; transform:rotate(${feature.properties.WR}deg)" class="fas fa-arrow-circle-up fa-3x"></i>`
                     })
                 });
             }
@@ -121,23 +137,28 @@ async function loadStations() {
 
     // Temperatur Layer hinzufügen
     const tempLayer = L.featureGroup();
-    const farbPalette = [
-        [0, "blue"],
-        [1, "orange"],
-        [2, "red"],
-
-    ]
+    const tempPalette = [
+        [-20, "#6B655F"], //<-20
+        [-10, "#732E75"], //-20 bis -10
+        [0, "#3701DA"], //-10 bis 0
+        [10, "#007800"], //0 bis 10
+        [20, "#FCFE05"], //10 bis 20
+        [30, "#F77700"], //20 bis 30
+        [40, "#F20205"], //30 bis 40        
+        [99, "730405"], //>40
+    ];
     L.geoJson(stations, {
         pointToLayer: function (feature, latlng) {
             if (feature.properties.LT) {
-                let color = 'red'
-                for (let i = 0; i < farbPalette.length; i++) {
-                    console.log(farbPalette[i], feature.properties.LT);
-                    if (feature.properties.LT < farbPalette[i][0])
-                        color = farbPalette[i][1]
-                    break;
+                let color = tempPalette[tempPalette.length - 1][1];
+                for (let i = 0; i < tempPalette.length; i++) {
+                    console.log(tempPalette[i], feature.properties.LT);
+                    if (feature.properties.LT < tempPalette[i][0]) {
+                        color = tempPalette[i][1]
+                        break;
+                    } else {}
                 }
-               // let color = 'blue';
+                // let color = 'blue';                      erster Farbverlauf
                 //if (feature.properties.LT > 0) {
                 //    color = 'red';
                 //}
@@ -151,5 +172,43 @@ async function loadStations() {
     }).addTo(tempLayer);
     layerControl.addOverlay(tempLayer, "Temperatur");
     tempLayer.addTo(karte)
+
+    // Relative Feuchte Layer hinzufügen
+    const feuchtLayer = L.featureGroup();
+    const feuchtPalette = [
+        [30, "#F0EEF2"],
+        [40, "#DBDEDB"],
+        [50, "#C4C9C8"],
+        [60, "#BCBDBE"],
+        [70, "#ABA9D1"],
+        [80, "#9D95DE"],
+        [90, "#8B85EC"],
+        [999, "#7677E4"],
+    ];
+    L.geoJson(stations, {
+        pointToLayer: function (feature, latlng) {
+            if (feature.properties.RH) {
+                let color = feuchtPalette[feuchtPalette.length - 1][1];
+                for (let i = 0; i < feuchtPalette.length; i++) {
+                    console.log(feuchtPalette[i], feature.properties.RH);
+                    if (feature.properties.RH < feuchtPalette[i][0]){
+                        color = feuchtPalette[i][1]
+                    break;
+                } else {}
+                }
+                return L.marker(latlng, {
+                    icon: L.divIcon({
+                        html: `<div class="feuchtLabel" style="background-color:${color}">${feature.properties.RH}</div>`
+                    })
+                });
+            }
+        }
+    }).addTo(feuchtLayer);
+    layerControl.addOverlay(feuchtLayer, "Relative Feuchte");
+    feuchtLayer.addTo(karte)
 }
+
+
+
+
 loadStations();
