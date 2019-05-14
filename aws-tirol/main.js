@@ -95,7 +95,7 @@ async function loadStations() {
             <footer> Quelle: Land Tirol - <a href="https://www.data.gv.at"> data.tirol.gv.at </a></footer>`;
         }) //Popups erstellen
         .addTo(awsTirol);
-    awsTirol.addTo(karte);
+    //awsTirol.addTo(karte);
     karte.fitBounds(awsTirol.getBounds()); //Zoom auf die Pins
     layerControl.addOverlay(awsTirol, "Wetterstationen Tirol");
 
@@ -158,7 +158,7 @@ async function loadStations() {
                         break;
                     } else {}
                 }
-                // let color = 'blue';                      erster Farbverlauf
+                // let color = 'blue';                      erster Farbverlaufversuch
                 //if (feature.properties.LT > 0) {
                 //    color = 'red';
                 //}
@@ -205,7 +205,7 @@ async function loadStations() {
         }
     }).addTo(feuchtLayer);
     layerControl.addOverlay(feuchtLayer, "Relative Feuchte");
-    feuchtLayer.addTo(karte)
+    //feuchtLayer.addTo(karte)
 }
 
 
