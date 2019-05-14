@@ -206,6 +206,48 @@ async function loadStations() {
     }).addTo(feuchtLayer);
     layerControl.addOverlay(feuchtLayer, "Relative Feuchte in %");
     //feuchtLayer.addTo(karte)
+
+    //Schneehöhen (eigner Farbverlauf)
+    const schneeLayer = L.featureGroup();
+    const schneePalette = [
+        [10, "#fcff00"],
+        [20, "#ffd100"],
+        [30, "#ff7800"],
+        [50, "#c10000"],
+        [75, "#900000"],
+        [100, "#2e0203"],
+        [150, "#00fffe"],
+        [200, "#2695ff"],
+        [250, "#3800d1"],
+        [300, "#3800d1"],
+        [400, "#772d76"],
+        [9999, "#e4e6e4"],
+    ]
+
+    L.geoJson(stations, {
+        pointToLayer: function (feature, latlng) {
+            if (feature.properties.HS) {
+                if (feature.properties.HS >= 0) {
+                    let color = schneePalette[schneePalette.length - 1][1];
+                    for (let i = 0; i < schneePalette.length; i++) {
+                        console.log(schneePalette[i], feature.properties.HS);
+                        if (feature.properties.RH < schneePalette[i][0]){
+                            color = schneePalette[i][1]
+                        break;
+                    } else {}
+                    }
+                    return L.marker(latlng, {
+                        icon: L.divIcon({
+                            html: `<div class="schneeLabel" style= "background-color: ${color}"> ${feature.properties.HS}</div>`
+                        })
+
+                    });
+                }
+            }
+        }
+    }).addTo(schneeLayer);
+    layerControl.addOverlay(schneeLayer, "Schneehöhe in cm")
+    //feuchtLayer.addTo(karte)
 }
 
 
