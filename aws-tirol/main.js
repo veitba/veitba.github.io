@@ -175,7 +175,7 @@ async function loadStations() {
 
     // Relative Feuchte Layer hinzufügen
     const feuchtLayer = L.featureGroup();
-    const feuchtPalette = [
+    const feuchtPalette = 
         [30, "#F0EEF2"],
         [40, "#DBDEDB"],
         [50, "#C4C9C8"],
