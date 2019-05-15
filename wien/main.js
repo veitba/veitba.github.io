@@ -70,3 +70,29 @@ karte.addControl(new L.Control.Fullscreen());
 karte.setView([48.208333, 16.373056], 12);
 
 // die Implementierung der Karte startet hier
+
+const url = 'https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SPAZIERPUNKTOGD &srsName=EPSG:4326&outputFormat=json';
+
+function makeIcon(feature, latlng) {
+    return L.marker(latlng, {
+            icon: L.icon({
+                iconUrl: 'http://www.data.wien.gv.at/icons/sehenswuerdigogd.svg',
+                iconSize: [36, 36]
+
+            })
+        })
+        .bindPopup(`
+<h3>${feature.properties.NAME}</h3>
+<p>${feature.properties.BEMERKUNG}</p>`);
+}
+
+async function loadSights(url) {
+    const response = await fetch(url);
+    const sightsData = await response.json();
+    const geoJson = L.geoJson(sightsData, {
+        pointToLayer: makeIcon
+    });
+    karte.addLayer(geoJson);
+}
+
+loadSights(url);
