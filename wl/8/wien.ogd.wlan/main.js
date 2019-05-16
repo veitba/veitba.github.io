@@ -109,7 +109,7 @@ async function loadWifi(url) {
     //Clustergruppe
     clusterGruppe.addLayer(geoJson);
     karte.addLayer(clusterGruppe);
-    layerControl.addOverlay(clusterGruppe, "Wlan-Stationen");
+    layerControl.addOverlay(clusterGruppe, "WLAN-Standorte");
 
     //Suchfeld einfügen
     const suchFeld = new L.Control.Search({
