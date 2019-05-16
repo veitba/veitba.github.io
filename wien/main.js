@@ -150,3 +150,36 @@ async function loadWege(wegeURL) {
     layerControl.addOverlay(wegeJson, "Spazierwege");
 }
 loadWege(wege);
+
+
+//WLAN Standorte einfügen
+
+const wifi = 'https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:WLANWIENATOGD&srsName=EPSG:4326&outputFormat=json';
+
+function makeWifi(feature, latlng) {
+    const wifiIcon = L.icon({
+        iconUrl: 'http://www.data.wien.gv.at/icons/wlanwienatogd.svg', //anderer Marker
+        iconSize: [16, 16]
+    });
+    const wifiMarker = L.marker(latlng, {
+        icon: wifiIcon
+    });
+
+    wifiMarker.bindPopup(`
+        <h3>${feature.properties.NAME}</h3>
+        <p>${feature.properties.ADRESSE}</p>        
+        `); //Name, Beschreibung, ohne Weblink (neuer Tab)
+    return wifiMarker;
+}
+
+async function loadWifi(wifiURL) {
+    const antwort = await fetch(wifiURL);
+    const wifiData = await antwort.json();
+    const wifiJson = L.geoJson(wifiData);
+
+    karte.addLayer(wifiJson);
+    layerControl.addOverlay(wifiJson, "WLAN-Standorte");
+}
+loadWege(wifi);
+
+
