@@ -164,7 +164,6 @@ function makeWifi(feature, latlng) {
     const wifiMarker = L.marker(latlng, {
         icon: wifiIcon
     });
-
     wifiMarker.bindPopup(`
         <h3>${feature.properties.NAME}</h3>
         <p>${feature.properties.ADRESSE}</p>        
@@ -172,14 +171,20 @@ function makeWifi(feature, latlng) {
     return wifiMarker;
 }
 
-async function loadWifi(wifiURL) {
-    const antwort = await fetch(wifiURL);
-    const wifiData = await antwort.json();
-    const wifiJson = L.geoJson(wifiData);
+async function loadWifi(wifi) {
+    const clusterGruppewifi = L.markerClusterGroup();
+    const responsewifi = await fetch(wifi);
+    const wifiData = await responsewifi.json();
+    const geoJson = L.geoJson(wifiData, {
+        pointToLayer: makeWifi
+    });
 
-    karte.addLayer(wifiJson);
-    layerControl.addOverlay(wifiJson, "WLAN-Standorte");
+    //Clustergruppe
+    clusterGruppewifi.addLayer(geoJson);
+    karte.addLayer(clusterGruppewifi);
+    layerControl.addOverlay(clusterGruppewifi, "WLAN-Standorte");
 }
-loadWege(wifi);
+
+loadWifi(wifi);
 
 
