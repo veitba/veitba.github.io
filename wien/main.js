@@ -108,7 +108,7 @@ async function loadSights(url) {
         layer: clusterGruppe,
         propertyName: "NAME",
         zoom: 17,
-        initial: false
+        initial: false,
     });
     karte.addControl(suchFeld);
 }
@@ -184,6 +184,16 @@ async function loadWifi(wifi) {
     karte.addLayer(clusterGruppewifi);
     layerControl.addOverlay(clusterGruppewifi, "WLAN-Standorte");
 }
+
+//Suchfeld Wifi
+    // const suchFeldwifi = new L.Control.Search({
+    //     layer: clusterGruppewifi,
+    //     propertyName: "NAME",
+    //     zoom: 17,
+    //     initial: false,
+    // });
+    // karte.addControl(suchFeldwifi);
+
 
 loadWifi(wifi);
 
