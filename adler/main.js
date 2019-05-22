@@ -96,19 +96,19 @@ L.control.layers({
 // Fernrohre
 let blickeGruppe = L.featureGroup().addTo(karte);
 // Positionsmarker hinzufügen
-// let pin = L.marker(
-//     [breite, laenge]
-// ).addTo(karte);
+let pin = L.marker(
+    [breite, laenge]
+).addTo(karte);
 
 // Popup zum Pin hängen
-// pin.bindPopup(titel);
+pin.bindPopup(titel);
 
 
 
 //2. Punkt
-// let pin2 = L.marker(
-//     [breite2, laenge2]
-// ).addTo(blickeGruppe);
+let pin2 = L.marker(
+    [breite2, laenge2]
+).addTo(blickeGruppe);
 // pin2.bindPopup(titel2);
 
 
