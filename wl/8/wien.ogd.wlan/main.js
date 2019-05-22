@@ -70,6 +70,8 @@ karte.addControl(new L.Control.Fullscreen());
 //
 // Wikipedia Artikel laden
 //
+const wikipediaGruppe = L.featureGroup().addTo(karte);
+layerControl.addOverlay(wikipediaGruppe, "Wikipedia Artikel") //Auswahlmöglichkeit hinzufügen
 
 async function wikipediaArtikelLaden(url) {
     console.log("Lade zoomend moveend", url);
@@ -79,25 +81,25 @@ async function wikipediaArtikelLaden(url) {
 
     console.log(jsonDaten);
     for (let artikel of jsonDaten.geonames) {
-        const wikipediaMarker = L.marker([artikel.lat,artikel.lng], {
+        const wikipediaMarker = L.marker([artikel.lat,artikel.lng], {       // Marker setzen
             icon : L.icon({
-                iconUrl : "icons/wikipedia.png",
-                iconSize :[22,22]
+                iconUrl : "icons/wikipedia.png", //neuer Marker
+                iconSize :[22,22] //Marker Größe
             })
             
-        }).addTo(karte);
+        }).addTo(wikipediaGruppe);
     
     // Popups hinzufügen
     wikipediaMarker.bindPopup(`
-        <h3>${artikel.title}</h3>
+        <h3>${artikel.title}</h3> 
         <p>${artikel.summary}</p>
         <hr>
         <footer><a target="blank" href="https://${artikel.wikipediaUrl}">Weblink</a></footer>
-        `);
+        `); //Titel, Zusammenfassung und Weblink des Artikels
     
     }
 }
-//
+
 
 karte.on("load", function () {
     //console.log("karte geladen", karte.getBounds());
@@ -109,13 +111,13 @@ karte.on("load", function () {
         w : karte.getBounds().getWest(),
     }
     //console.log(ausschnitt)
-    const geonamesUrl = `http://api.geonames.org/wikipediaBoundingBoxJSON?formatted=true&north=${ausschnitt.n}&south=${ausschnitt.s}&east=${ausschnitt.o}&west=${ausschnitt.w}&username=webmapping&style=full&maxRows=5`;
+    const geonamesUrl = `http://api.geonames.org/wikipediaBoundingBoxJSON?formatted=true&north=${ausschnitt.n}&south=${ausschnitt.s}&east=${ausschnitt.o}&west=${ausschnitt.w}&username=webmapping&style=full&maxRows=5&lang=de`;
     //console.log(geonamesUrl);
 
     //JSON-Artikel laden
     wikipediaArtikelLaden(geonamesUrl);
 });
-
+//Wiki Ende
 
 karte.setView([48.208333, 16.373056], 12);
 
