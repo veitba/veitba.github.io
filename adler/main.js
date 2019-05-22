@@ -98,7 +98,7 @@ let blickeGruppe = L.featureGroup().addTo(karte);
 // Positionsmarker hinzufügen
 let pin = L.marker(
     [breite, laenge]
-).addTo(blickeGruppe);
+).addTo(karte);
 
 // Popup zum Pin hängen
 pin.bindPopup(titel);
@@ -136,3 +136,23 @@ coords.addTo(karte);
 karte.on('click', function (e) {
     coords.setCoordinates(e);
 });
+
+//gpx track laden
+new L.GPX("AdlerwegEtappeO9.gpx", {
+    async: true,
+    marker_options: {
+        startIconUrl: 'images/pin-icon-start.png',
+        endIconUrl: 'images/pin-icon-end.png',
+        shadowUrl: 'images/pin-shadow.png'
+    }
+}).on('loaded', function (e) {
+    karte.fitBounds(e.target.getBounds());
+}).on('addline', function (e) { //Höhenprofil hinzufügen
+    console.log('linie geladen');
+    const controlElevation = L.control.elevation({
+        detachedView: true, //if false the chart is drawn within map container
+        elevationDiv: "#elevation-div", // if (detached), the elevation chart container
+    });
+    controlElevation.addTo(karte); //Daten einfügen (Höhenlinie)
+    controlElevation.addData(e.line);
+}).addTo(karte);
