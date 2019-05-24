@@ -109,7 +109,7 @@ pin.bindPopup(titel);
 let pin2 = L.marker(
     [breite2, laenge2]
 ).addTo(blickeGruppe);
-// pin2.bindPopup(titel2);
+pin2.bindPopup(titel2);
 
 
 
