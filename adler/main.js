@@ -147,6 +147,15 @@ new L.GPX("AdlerwegEtappeO9.gpx", {
     }
 }).on('loaded', function (e) {
     karte.fitBounds(e.target.getBounds());
+    const statsDiv = document.getElementById("stats"); //Routeninformationen aus dem Index öffnen
+    
+    const verticalMeters = Math.round(e.target.get_elevation_gain());//Höhenmeter
+    const minHeight = Math.round(e.target.get_elevation_min());
+    const maxHeight = Math.round(e.target.get_elevation_max());
+    const name = e.target.get_name();
+    statsDiv.innerHTML = `Routen Statistik: <br> Name: ${name}, Höhenunterschied ${verticalMeters} m, niedrigster Punkt ${minHeight} m, höchster Punkt ${maxHeight} m
+    `; //Routeninformationen einsetzen
+
 }).on('addline', function (e) { //Höhenprofil hinzufügen
     console.log('linie geladen');
     const controlElevation = L.control.elevation({
@@ -156,7 +165,7 @@ new L.GPX("AdlerwegEtappeO9.gpx", {
     controlElevation.addTo(karte); //Daten einfügen (Höhenlinie)
     controlElevation.addData(e.line);
     const gpxLinie = e.line.getLatLngs(); //steile Abschnitte kennzeichnen
-    console.log(gpxLinie);
+    //console.log(gpxLinie);
     for (let i = 1; i < gpxLinie.length; i += 1) {
         //console.log(gpxLinie[i]);
         let p1 = gpxLinie[i - 1];
@@ -167,7 +176,7 @@ new L.GPX("AdlerwegEtappeO9.gpx", {
         );
         let delta = (p2.meta.ele - p1.meta.ele); //Höhenunterschied ausrechnen
         let proz = (dist != 0 ? delta / dist * 100.0 : 0).toFixed(1); //Prozentzahl berechnen;   toFixed(1)=auf eine Kommastelle gerundet
-        console.log('Distanz: ', dist, 'Höhendiff.: ', delta, 'Steigung: ', proz);
+        //console.log('Distanz: ', dist, 'Höhendiff.: ', delta, 'Steigung: ', proz);
         let farbe = //Colorrewer2.org
             proz >= 10 ? "#d73027" :
             proz >= 6 ? "#fc8d59" :
