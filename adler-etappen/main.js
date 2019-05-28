@@ -82,5 +82,88 @@ new L.Control.MiniMap(
 
 // die Implementierung der Karte startet hier
 
-let pulldown = document.getElementById("etappenPulldown")
-console.log(pulldown);
+let pulldown = document.getElementById("etappenPulldown"); //Pulldown Menü aktivieren
+for (let i=0; i < ETAPPEN.length; i++) {
+    //console.log(ETAPPEN[i]);
+    pulldown.innerHTML += `<option value="${i}">${ETAPPEN[i].titel}</option>`
+}
+
+//GPX Gruppe, um GPX-Tracks abzuwählen
+let gpxGruppe = L.featureGroup().addTo(karte);
+layerControl.addOverlay(gpxGruppe, "GPX-Track");
+
+let controlElevation = null;
+//
+function etappeErzeugen(nummer){
+    let daten = ETAPPEN[nummer];
+    //let titelText = daten.titel;
+    //let titelElement = document.getElementById("daten_titel");
+    //titelElement.innerHTML = titelText;
+
+    document.getElementById("daten_titel").innerHTML = daten.titel;
+    document.getElementById("daten_info").innerHTML = daten.info;
+    document.getElementById("daten_strecke").innerHTML = daten.strecke;
+    //console.log(daten);
+
+    //GPX Track laden
+    console.log(daten.gpsid);
+    daten.gpsid = daten.gpsid.replace("A","");
+    console.log(daten.gpsid);
+
+    gpxGruppe.clearLayers(); //damit nur eine Route gleichzeitig angezeigt wird
+    const gpxTrack = new L.GPX(`gpx/AdlerwegEtappe${daten.gpsid}.gpx`, {
+        async : true,
+        marker_options : {
+            startIconUrl : 'icons/pin-icon-start.png',
+            endIconUrl : 'icons/pin-icon-end.png',
+            shadowUrl : 'icons/pin-shadow.png',
+            iconSize : [32,37]
+        }
+    }).addTo(gpxGruppe);
+
+    gpxTrack.on("loaded", function() {
+        karte.fitBounds(gpxTrack.getBounds());
+    });
+    gpxTrack.on("addline", function (evt) {
+        //bestehendes Profil löschen
+        if (controlElevation) {
+            controlElevation.clear();
+            document.getElementById("elevation-div").innerHTML = "";
+        }
+        //Höhenprofil anzeigen
+        controlElevation = L.control.elevation({
+            theme : "steelblue-theme",
+            detachedView : true,
+            elevationDiv : "#elevation-div"
+        })
+        controlElevation.addTo(karte);
+        controlElevation.addData(evt.line);
+    })
+}
+
+etappeErzeugen(0); //Schon beim laden in der Konsole anzeigen
+pulldown.onchange = function (evt) {
+    let opts = evt.target.options;
+    console.log(opts[opts.selectedIndex].value);
+    console.log(opts[opts.selectedIndex].text);
+    etappeErzeugen(opts[opts.selectedIndex].value);
+}
+
+// Route selbst konfigurieren, zum Startpunkt und Endpunkt (Navi)
+L.Routing.control({}).addTo(karte);
+
+const routingMachine = L.Routing.control({}).addTo(karte);
+
+let start, end;
+karte.on("click", function(ev) {
+    //console.log("Clicked: ", ev.lat);
+    if (!start) {
+        start = ev.latlng;
+    } else {
+        end = ev.latlng;
+        routingMachine.setWaypoints([start, end]);
+        routingMachine.route();
+        start = null;
+    }
+    //console.log("Start: ", start, "Ende: ", end);
+})
