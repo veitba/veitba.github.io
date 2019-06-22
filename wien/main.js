@@ -125,7 +125,7 @@ karte.addControl(scale);
 
 
 //Spazierwege hinzufügen
-const wege = 'https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SPAZIERLINIEOGD &srsName=EPSG:4326&outputFormat=json';
+const wege = 'https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:WANDERWEGEOGD&srsName=EPSG:4326&outputFormat=json';
 
 function linienPopup(feature, layer) { //Wege Popup (nur Name möglich)
     const popup = `
