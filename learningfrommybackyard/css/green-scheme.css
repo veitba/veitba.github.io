@@ -443,7 +443,7 @@ input.mainBtn {
 }
 
 #homeIntro {
-  background-image: url("../images/la/la_intro.jpg");
+  background-image: url("../images/arch/lageplan2.png");
 }
 
 #portfolio {
@@ -1312,7 +1312,7 @@ blockquote {
 /*------------------------------------------------------
 	RESPONSIVE STYLES 
 --------------------------------------------------------*/
-@media (max-width: 991px) {
+#media (max-width: 991px) {
   .site-header {
     padding: 17px 0;
     position: relative !important;

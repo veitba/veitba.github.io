@@ -192,35 +192,25 @@
     animation: scaleUpTo .5s ease both
 }
 
-@-webkit-keyframes empty {
+#-webkit-keyframes empty {
     0% {
         opacity: 1
     }
 }
 
-@-moz-keyframes empty {
+#-moz-keyframes empty {
     0% {
         opacity: 1
     }
 }
 
-@keyframes empty {
+#keyframes empty {
     0% {
         opacity: 1
     }
 }
 
-@-webkit-keyframes fadeIn {
-    0% {
-        opacity: 0
-    }
-
-    100% {
-        opacity: 1
-    }
-}
-
-@-moz-keyframes fadeIn {
+#-webkit-keyframes fadeIn {
     0% {
         opacity: 0
     }
@@ -230,7 +220,7 @@
     }
 }
 
-@keyframes fadeIn {
+#-moz-keyframes fadeIn {
     0% {
         opacity: 0
     }
@@ -240,7 +230,17 @@
     }
 }
 
-@-webkit-keyframes fadeOut {
+#keyframes fadeIn {
+    0% {
+        opacity: 0
+    }
+
+    100% {
+        opacity: 1
+    }
+}
+
+#-webkit-keyframes fadeOut {
     0% {
         opacity: 1
     }
@@ -250,7 +250,7 @@
     }
 }
 
-@-moz-keyframes fadeOut {
+#-moz-keyframes fadeOut {
     0% {
         opacity: 1
     }
@@ -260,7 +260,7 @@
     }
 }
 
-@keyframes fadeOut {
+#keyframes fadeOut {
     0% {
         opacity: 1
     }
@@ -270,7 +270,7 @@
     }
 }
 
-@-webkit-keyframes backSlideOut {
+#-webkit-keyframes backSlideOut {
     25% {
         opacity: .5;
         -webkit-transform: translateZ(-500px)
@@ -287,7 +287,7 @@
     }
 }
 
-@-moz-keyframes backSlideOut {
+#-moz-keyframes backSlideOut {
     25% {
         opacity: .5;
         -moz-transform: translateZ(-500px)
@@ -304,7 +304,7 @@
     }
 }
 
-@keyframes backSlideOut {
+#keyframes backSlideOut {
     25% {
         opacity: .5;
         transform: translateZ(-500px)
@@ -321,7 +321,7 @@
     }
 }
 
-@-webkit-keyframes backSlideIn {
+#-webkit-keyframes backSlideIn {
 
     0%,
     25% {
@@ -340,7 +340,7 @@
     }
 }
 
-@-moz-keyframes backSlideIn {
+#-moz-keyframes backSlideIn {
 
     0%,
     25% {
@@ -359,7 +359,7 @@
     }
 }
 
-@keyframes backSlideIn {
+#keyframes backSlideIn {
 
     0%,
     25% {
@@ -378,81 +378,81 @@
     }
 }
 
-@-webkit-keyframes scaleToFade {
+#-webkit-keyframes scaleToFade {
     to {
         opacity: 0;
         -webkit-transform: scale(0.8)
     }
 }
 
-@-moz-keyframes scaleToFade {
+#-moz-keyframes scaleToFade {
     to {
         opacity: 0;
         -moz-transform: scale(0.8)
     }
 }
 
-@keyframes scaleToFade {
+#keyframes scaleToFade {
     to {
         opacity: 0;
         transform: scale(0.8)
     }
 }
 
-@-webkit-keyframes goDown {
+#-webkit-keyframes goDown {
     from {
         -webkit-transform: translateY(-100%)
     }
 }
 
-@-moz-keyframes goDown {
+#-moz-keyframes goDown {
     from {
         -moz-transform: translateY(-100%)
     }
 }
 
-@keyframes goDown {
+#keyframes goDown {
     from {
         transform: translateY(-100%)
     }
 }
 
-@-webkit-keyframes scaleUpFrom {
+#-webkit-keyframes scaleUpFrom {
     from {
         opacity: 0;
         -webkit-transform: scale(1.5)
     }
 }
 
-@-moz-keyframes scaleUpFrom {
+#-moz-keyframes scaleUpFrom {
     from {
         opacity: 0;
         -moz-transform: scale(1.5)
     }
 }
 
-@keyframes scaleUpFrom {
+#keyframes scaleUpFrom {
     from {
         opacity: 0;
         transform: scale(1.5)
     }
 }
 
-@-webkit-keyframes scaleUpTo {
+#-webkit-keyframes scaleUpTo {
     to {
         opacity: 0;
         -webkit-transform: scale(1.5)
     }
 }
 
-@-moz-keyframes scaleUpTo {
+#-moz-keyframes scaleUpTo {
     to {
         opacity: 0;
         -moz-transform: scale(1.5)
     }
 }
 
-@keyframes scaleUpTo {
+#keyframes scaleUpTo {
     to {
         opacity: 0;
         transform: scale(1.5)
@@ -758,7 +758,7 @@
     background: rgba(0, 0, 0, 0.8)
 }
 
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+#media only screen and (-webkit-min-device-pixel-ratio: 1.5),
 only screen and (min--moz-device-pixel-ratio: 1.5),
 only screen and (min-device-pixel-ratio: 1.5) {
 
@@ -766,12 +766,12 @@ only screen and (min-device-pixel-ratio: 1.5) {
     .fancybox-close,
     .fancybox-prev span,
     .fancybox-next span {
-        background-image: url("../images/fancybox_sprite@2x.png");
+        background-image: url("../images/fancybox_sprite#2x.png");
         background-size: 44px 152px
     }
 
     #fancybox-loading div {
-        background-image: url("../images/fancybox_loading@2x.gif");
+        background-image: url("../images/fancybox_loading#2x.gif");
         background-size: 24px 24px
     }
 }
@@ -791,7 +791,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
     list-style: none
 }
 
-@font-face {
+#font-face {
     font-family: 'FontAwesome';
     src: url("../bootstrap/fonts/fontawesome-webfont.eot");
     src: url("../bootstrap/fonts/fontawesome-webfont.eot?#iefix") format("embedded-opentype"), url("../bootstrap/fonts/fontawesome-webfont.woff") format("woff"), url("../bootstrap/fonts/fontawesome-webfont.ttf") format("truetype"), url("../bootstrap/fonts/fontawesome-webfont.svg#fontawesome-webfont") format("svg");
@@ -1018,7 +1018,7 @@ html[xmlns] .slides {
     cursor: default
 }
 
-@media screen and (max-width: 860px) {
+#media screen and (max-width: 860px) {
     .flex-direction-nav .flex-prev {
         opacity: 1;
         left: 10px
